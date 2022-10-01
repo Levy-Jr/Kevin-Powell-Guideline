@@ -1,0 +1,302 @@
+:root{
+  --clr-primary-700: hsl(300, 43%, 22%);
+  --clr-primary-300: hsl(333, 80%, 67%);
+  --clr-neutral-100: hsl(303, 10%, 53%);
+  --clr-neutral-200: hsl(300, 24%, 96%);
+  --clr-neutral-300: hsl(0, 0%, 100%);
+
+  --ff-primary: 'League Spartan', sans-serif;
+
+  --fs-400: .8125rem;
+  --fs-500: .9625rem;
+  --fs-900: 2rem;
+
+  --br: .5rem;
+  --spacer: 2rem;
+}
+
+/* 800px */
+@media (min-width: 50em){
+  :root{
+    --fs-900: 3rem;
+  }
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body{
+  font-family: var(--ff-primary);
+  font-size: var(--fs-400);
+  padding-top: 5rem;
+  text-align: center;
+  /* Você pode ter múltiplos background images no mesmo elemento. Ele precisa ser separado por uma vírgula */
+  background-image: 
+  url(images/bg-pattern-top-desktop.svg),
+  url(images/bg-pattern-bottom-desktop.svg);
+  /* Para você editá-los, você precisa separar por uma vírgula também */
+  background-position: top left, bottom right;
+  background-repeat: no-repeat;
+  /* Seta a largura e a altura do background em relação ao elemento pai */
+  background-size: max(50%, 400px);
+  /* a função max escolhe qual é o maior entre os dois. Se 50% for maior que 400px então ele vai escolher os 50%. Se 50% for MENOR que 400px, então ele vai escolher os 400px. Ele sempre escolhe o maior entre os dois */
+}
+
+@media (min-width: 50em){
+  body{
+    padding-top: 7rem;
+  }
+}
+
+h1{
+  font-size: var(--fs-900);
+  color: var(--clr-primary-700);
+  line-height: 1;
+  /* unidade de medida de caractere relativa a largura do 0 dependendo do font family
+  */
+  max-width: 12ch;
+  margin-bottom: 1em;
+  font-weight: 800;
+}
+
+.lead{
+  font-size: var(--fs-500);
+}
+
+/* UTILITIES */
+
+.container{
+  /* 1120px */
+  max-width: 70rem;
+  padding: 0 2em;
+  margin: 0 auto;
+}
+
+.flow-content > * + *{
+  margin-top: var(--flow-space, 1rem);
+}
+
+.split{
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+
+/* 800px */
+@media (min-width: 50em){
+  .split{
+    flex-direction: row;
+  }
+}
+
+.a-center{
+  align-items: center;
+}
+
+/* END UTILITIES */
+
+.ratings li{
+  color: var(--clr-primary-700);
+  background-color: var(--clr-neutral-200);
+  font-weight: 800;
+  padding: .75rem 2rem;
+  border-radius: var(--br);
+  /* 400px */
+  max-width: 25rem;
+  /* Centralizar horizontalmente um conteúdo sem mudar a margem vertical */
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+/* Stars */
+.ratings li::before{
+  content: '';
+  width: 100px;
+  height: 1rem;
+  /* margin auto só funciona se o elemento for display block e tiver uma largura definida */
+  margin: 0 auto;
+  display: block;
+  margin-bottom: .5rem;
+  background-image: url('images/icon-star.svg');
+  /* o background-image é repetido o máximo possível conforme a largura sem ser cortado e o espaço em branco é distribuído uniformememente entre as imagens */
+  background-repeat: space;
+}
+
+@media (min-width: 50em){
+  .ratings li{
+    display: flex;
+    align-items: center;
+  }
+
+  .ratings li::before{
+    margin: 0 1.5rem 0 0;
+  }
+
+  /* First-of-type pega a primeira ocorrência do elemento que selecionamos (nesse caso foi o elemento "li") */
+
+  .ratings li:first-of-type{
+    transform: translateX(-2rem);
+  }
+
+  /* Last-of-type pega a ÚLTIMA ocorrência do elemento que selecionamos */
+
+  .ratings li:last-of-type{
+    transform: translateX(2rem);
+  }
+}
+
+/* para o nth-child funcionar você precisa selecionar o elemento que você quer modificar e o número da posição dele* (nesse caso o "li") */
+
+.quotes li:nth-child(2){
+  transform: translateY(3rem);
+}
+
+.quotes li:nth-child(3){
+  transform: translateY(6rem);
+}
+
+.quotes blockquote {
+  background-color: var(--clr-primary-700);
+  color: var(--clr-neutral-200);
+  text-align: left;
+  border-radius: var(--br);
+  /* 2rem */
+  padding: var(--spacer);
+  /* 400px */
+  max-width: 25rem;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.quotes img {
+  width: 3rem;
+  border-radius: 50%;
+}
+
+@media (min-width: 50em){
+  /* 2rem */
+  .quotes img{
+  margin-right: var(--spacer);
+}
+}
+
+.name {
+  font-weight: 800;
+}
+
+.status {
+  color: var(--clr-primary-300);
+}
+
+.quotes .quote {
+  margin-top: var(--spacer);
+}
+
+main{
+  display: grid;
+  gap: 3rem 1rem;
+}
+
+@media (min-width: 50em){
+  main{
+    grid-template-columns: 1fr 1.5fr;
+    text-align: left;
+  }
+
+  .intro {
+    grid-column: 1 / 2;
+  }
+
+  h1{
+    margin-bottom: .125em;
+  }
+  
+  .ratings {
+    grid-column: 2 / 3;
+    align-self: center;
+  }
+  
+  .quotes{
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 50em){
+  h1{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
